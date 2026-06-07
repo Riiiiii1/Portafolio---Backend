@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "solicituds",
+  "info": {
+    "singularName": "solicitud",
+    "pluralName": "solicituds",
+    "displayName": "Solicitud"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombreSolicitante": {
+      "type": "string",
+      "required": true
+    },
+    "correoSolicitante": {
+      "type": "email",
+      "required": true
+    },
+    "programadorSlug": {
+      "type": "string",
+      "required": true
+    },
+    "idea": {
+      "type": "text",
+      "required": true
+    },
+    "estado": {
+      "type": "string"
+    },
+    "observacion": {
+      "type": "text"
+    }
+  }
+}

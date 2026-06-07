@@ -12,14 +12,17 @@
   "pluginOptions": {},
   "attributes": {
     "nombre": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "slug": {
       "type": "uid",
-      "targetField": "nombre"
+      "targetField": "nombre",
+      "required": true
     },
     "descripcionBreve": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "descripcionCompleta": {
       "type": "blocks"
@@ -36,6 +39,7 @@
     },
     "tipo": {
       "type": "enumeration",
+      "required": true,
       "enum": [
         "academico",
         "personal",
@@ -44,7 +48,8 @@
       ]
     },
     "tecnologias": {
-      "type": "json"
+      "type": "json",
+      "required": true
     },
     "repositorio": {
       "type": "string"

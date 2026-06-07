@@ -452,13 +452,13 @@ export interface ApiProgramadorProgramador extends Struct.CollectionTypeSchema {
   };
   attributes: {
     activo: Schema.Attribute.Boolean;
-    correo: Schema.Attribute.Email;
+    correo: Schema.Attribute.Email & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    descripcionBreve: Schema.Attribute.String;
+    descripcionBreve: Schema.Attribute.String & Schema.Attribute.Required;
     descripcionCompleta: Schema.Attribute.Blocks;
-    especialidad: Schema.Attribute.String;
+    especialidad: Schema.Attribute.String & Schema.Attribute.Required;
     fotoPerfil: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
@@ -471,14 +471,14 @@ export interface ApiProgramadorProgramador extends Struct.CollectionTypeSchema {
       'api::programador.programador'
     > &
       Schema.Attribute.Private;
-    nombre: Schema.Attribute.String;
+    nombre: Schema.Attribute.String & Schema.Attribute.Required;
     proyectos: Schema.Attribute.Relation<
       'manyToMany',
       'api::proyecto.proyecto'
     >;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'nombre'>;
-    stack: Schema.Attribute.JSON;
+    slug: Schema.Attribute.UID<'nombre'> & Schema.Attribute.Required;
+    stack: Schema.Attribute.JSON & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -500,7 +500,7 @@ export interface ApiProyectoProyecto extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     demo: Schema.Attribute.String;
-    descripcionBreve: Schema.Attribute.String;
+    descripcionBreve: Schema.Attribute.String & Schema.Attribute.Required;
     descripcionCompleta: Schema.Attribute.Blocks;
     destacado: Schema.Attribute.Boolean;
     imagen: Schema.Attribute.Media<
@@ -513,18 +513,19 @@ export interface ApiProyectoProyecto extends Struct.CollectionTypeSchema {
       'api::proyecto.proyecto'
     > &
       Schema.Attribute.Private;
-    nombre: Schema.Attribute.String;
+    nombre: Schema.Attribute.String & Schema.Attribute.Required;
     programadors: Schema.Attribute.Relation<
       'manyToMany',
       'api::programador.programador'
     >;
     publishedAt: Schema.Attribute.DateTime;
     repositorio: Schema.Attribute.String;
-    slug: Schema.Attribute.UID<'nombre'>;
-    tecnologias: Schema.Attribute.JSON;
+    slug: Schema.Attribute.UID<'nombre'> & Schema.Attribute.Required;
+    tecnologias: Schema.Attribute.JSON & Schema.Attribute.Required;
     tipo: Schema.Attribute.Enumeration<
       ['academico', 'personal', 'laboral', 'simulado']
-    >;
+    > &
+      Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -545,15 +546,48 @@ export interface ApiServicioServicio extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    descripcion: Schema.Attribute.String;
-    icono: Schema.Attribute.String;
+    descripcion: Schema.Attribute.String & Schema.Attribute.Required;
+    icono: Schema.Attribute.String & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::servicio.servicio'
     > &
       Schema.Attribute.Private;
-    nombre: Schema.Attribute.String;
+    nombre: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSolicitudSolicitud extends Struct.CollectionTypeSchema {
+  collectionName: 'solicituds';
+  info: {
+    displayName: 'Solicitud';
+    pluralName: 'solicituds';
+    singularName: 'solicitud';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    correoSolicitante: Schema.Attribute.Email & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    estado: Schema.Attribute.String;
+    idea: Schema.Attribute.Text & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::solicitud.solicitud'
+    > &
+      Schema.Attribute.Private;
+    nombreSolicitante: Schema.Attribute.String & Schema.Attribute.Required;
+    observacion: Schema.Attribute.Text;
+    programadorSlug: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1075,6 +1109,7 @@ declare module '@strapi/strapi' {
       'api::programador.programador': ApiProgramadorProgramador;
       'api::proyecto.proyecto': ApiProyectoProyecto;
       'api::servicio.servicio': ApiServicioServicio;
+      'api::solicitud.solicitud': ApiSolicitudSolicitud;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

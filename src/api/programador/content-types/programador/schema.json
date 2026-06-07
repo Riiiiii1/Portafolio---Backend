@@ -12,13 +12,16 @@
   "pluginOptions": {},
   "attributes": {
     "nombre": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "especialidad": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "descripcionBreve": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "descripcionCompleta": {
       "type": "blocks"
@@ -26,6 +29,7 @@
     "fotoPerfil": {
       "type": "media",
       "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
@@ -34,7 +38,8 @@
       ]
     },
     "correo": {
-      "type": "email"
+      "type": "email",
+      "required": true
     },
     "github": {
       "type": "string"
@@ -44,13 +49,15 @@
     },
     "slug": {
       "type": "uid",
-      "targetField": "nombre"
+      "targetField": "nombre",
+      "required": true
     },
     "activo": {
       "type": "boolean"
     },
     "stack": {
-      "type": "json"
+      "type": "json",
+      "required": true
     },
     "proyectos": {
       "type": "relation",
