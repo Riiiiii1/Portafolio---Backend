@@ -579,6 +579,7 @@ export interface ApiSolicitudSolicitud extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     estado: Schema.Attribute.String;
     idea: Schema.Attribute.Text & Schema.Attribute.Required;
+    leido: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

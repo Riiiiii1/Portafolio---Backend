@@ -32,6 +32,10 @@
     },
     "observacion": {
       "type": "text"
+    },
+    "leido": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
